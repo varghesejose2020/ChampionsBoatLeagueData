@@ -11,16 +11,21 @@
             background-color: #f8f9fc;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: row;
+            gap: 30px;
+            padding-top: 30px;
         }
 
-        /* Container for the Table */
+        /* Container for the Tables */
         .table-container {
-            width: 80%;
-            margin: 30px auto;
-            padding: 20px;
+            width: 45%;
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
         }
 
         /* Table Header Styles */
@@ -61,13 +66,15 @@
             background-color: #f1f1f1;
         }
 
-        /* Styling for the Team Name with Logo */
-        td img {
-            width: 100%;          /* Ensure image takes full width of the cell */
-            height: auto;         /* Maintain aspect ratio */
-            max-width: 35px;      /* Limit the size */
-            margin-right: 15px;
-            vertical-align: middle;
+        /* Status Color */
+        .completed {
+            color: green;
+            font-weight: bold;
+        }
+
+        .upcoming {
+            color: red;
+            font-weight: bold;
         }
 
         /* Table Row Style */
@@ -80,23 +87,53 @@
             background-color: #ffffff;
         }
 
-        /* Responsive Design */
+        /* Responsive Design for Smaller Screens */
         @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                align-items: center;
+            }
+
             .table-container {
-                width: 95%;
+                width: 90%;
+                margin-bottom: 20px;
             }
 
             table {
                 font-size: 14px;
             }
-
-            td img {
-                max-width: 25px;   /* Smaller image size on smaller screens */
-            }
         }
+
+        /* Styling for the Team Name with Logo */
+        td img {
+            width: 100%;          /* Ensure image takes full width of the cell */
+            height: auto;         /* Maintain aspect ratio */
+            max-width: 35px;      /* Limit the size */
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
     </style>
 </head>
 <body>
+    <!-- First Table: Schedule -->
+    <div class="table-container">
+        <h1>Champions Boat League 2025 Schedule</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Venue</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="schedule-body">
+                <!-- Dynamic Content Will Be Loaded Here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Second Table: Boat Clubs -->
     <div class="table-container">
         <h1>Champions Boat League 2025</h1>
         <table>
@@ -156,5 +193,54 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+        // List of matches with venues and dates
+        const matches = [
+            { venue: 'Kainakari, Alappuzha', date: '19-09-2025' },
+            { venue: 'Dharmadom, Kannur', date: '' },
+            { venue: 'Thazhathangadi, Kottayam', date: '27-09-2025' },
+            { venue: 'Cheruvathoor, Kasaragod', date: '02-10-2025' },
+            { venue: 'Piravom, Ernakulam', date: '04-10-2025' },
+            { venue: 'Marine Drive, Ernakulam', date: '11-10-2025' },
+            { venue: 'Beypore, Kozhikode', date: '19-10-2025' },
+            { venue: 'Kottappuram, Thrissur', date: '25-10-2025' },
+            { venue: 'Pulinkunnu, Alappuzha', date: '01-11-2025' },
+            { venue: 'Karuvatta, Alappuzha', date: '08-11-2025' },
+            { venue: 'Pandanad, Chengannur, Alappuzha', date: '15-11-2025' },
+            { venue: 'Kayamkulam, Alappuzha', date: '22-11-2025' },
+            { venue: 'Kallada, Kollam', date: '29-11-2025' },
+            { venue: "President's Trophy, Kollam", date: '06-12-2025' },
+        ];
+
+        // Function to check the match status
+        function checkMatchStatus(matchDate) {
+            const today = new Date();
+            const [day, month, year] = matchDate.split('-');
+            const matchDateObj = new Date(`${month}-${day}-${year}`);
+
+            return matchDateObj < today ? 'Completed' : 'Upcoming';
+        }
+
+        // Function to display the matches dynamically
+        function displaySchedule() {
+            const scheduleBody = document.getElementById('schedule-body');
+            matches.forEach(match => {
+                const status = match.date ? checkMatchStatus(match.date) : 'Upcoming';
+                const statusClass = status === 'Completed' ? 'completed' : 'upcoming';
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+                    <td>${match.venue}</td>
+                    <td>${match.date || 'TBA'}</td>
+                    <td class="${statusClass}">${status}</td>
+                `;
+                scheduleBody.appendChild(row);
+            });
+        }
+
+        // Call the displaySchedule function to populate the schedule table
+        displaySchedule();
+    </script>
 </body>
 </html>
