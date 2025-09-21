@@ -103,16 +103,6 @@
                 font-size: 14px;
             }
         }
-
-        /* Styling for the Team Name with Logo */
-        td img {
-            width: 100%;          /* Ensure image takes full width of the cell */
-            height: auto;         /* Maintain aspect ratio */
-            max-width: 35px;      /* Limit the size */
-            margin-right: 15px;
-            vertical-align: middle;
-        }
-
     </style>
 </head>
 <body>
@@ -141,54 +131,54 @@
                 <tr>
                     <th>Boat Club</th>
                     <th>Team Name</th>
-                    <th>Logo</th>
+                    <th>Boat Name</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Pallathuruthi Boat Club, Alappuzha</td>
                     <td>Tropical Titans</td>
-                    <td><img src="https://raw.githubusercontent.com/varghesejose2020/ChampionsBoatLeagueData/refs/heads/main/Images/TropicalTitans.jpg" alt="Tropical Titans"></td>
+                    <td>Melpadam</td>
                 </tr>
                 <tr>
                     <td>Village Boat Club, Kainakary</td>
                     <td>Pride Chasers</td>
-                    <td><img src="https://raw.githubusercontent.com/varghesejose2020/ChampionsBoatLeagueData/refs/heads/main/Images/PrideChasers.jpg" alt="Raging Rowers"></td>
+                    <td>Veeyapuram</td>
                 </tr>
                 <tr>
                     <td>Niranam Boat Club</td>
                     <td>Super Oars</td>
-                    <td><img src="https://example.com/mighty_oars_logo.png" alt="Mighty Oars"></td>
+                    <td>Niranam</td>
                 </tr>
                 <tr>
                     <td>Punnamada Boat Club</td>
                     <td>Ripple Breakers</td>
-                    <td><img src="https://example.com/backwater_knights_logo.png" alt="Backwater Knights"></td>
+                    <td>Nadubhagham</td>
                 </tr>
                 <tr>
                     <td>Emmanuael Boat Club</td>
                     <td>Chundan Warriers</td>
-                    <td><img src="https://example.com/thunder_oars_logo.png" alt="Thunder Oars"></td>
+                    <td>Naduvileparamban</td>
                 </tr>
                 <tr>
                     <td>Town Boat Club, Kumarakom</td>
                     <td>Backwater Warriors</td>
-                    <td><img src="https://raw.githubusercontent.com/varghesejose2020/ChampionsBoatLeagueData/main/Images/Backwaterwarriors.jpg" alt="Backwaterwarriors"></td>
+                    <td>Payippadan</td>
                 </tr>
                 <tr>
                     <td>Thekkekara Boat Club, Moncompu</td>
                     <td>BackWater Chargers</td>
-                    <td><img src="https://example.com/thunder_oars_logo.png" alt="Thunder Oars"></td>
+                    <td>Cheruthana</td>
                 </tr>
                 <tr>
                     <td>Karichal Chundan Boat Club</td>
                     <td>Thunder Oars</td>
-                    <td><img src="https://raw.githubusercontent.com/varghesejose2020/ChampionsBoatLeagueData/refs/heads/main/Images/ThunderOars-1.png" alt="Thunder Oars"></td>
+                    <td>Karichal</td>
                 </tr>
                 <tr>
                     <td>Changanaserry Boat Club</td>
                     <td>Wave Glyders</td>
-                    <td><img src="https://example.com/thunder_oars_logo.png" alt="Thunder Oars"></td>
+                    <td>Champakulam</td>
                 </tr>
             </tbody>
         </table>
@@ -216,6 +206,8 @@
         // Function to check the match status
         function checkMatchStatus(matchDate) {
             const today = new Date();
+            if (!matchDate) return 'Upcoming';
+
             const [day, month, year] = matchDate.split('-');
             const matchDateObj = new Date(`${month}-${day}-${year}`);
 
