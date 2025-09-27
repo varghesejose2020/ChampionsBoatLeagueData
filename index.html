@@ -166,7 +166,7 @@
                     <td>Payippadan</td>
                 </tr>
                 <tr>
-                    <td>Thekkekara Boat Club, Moncompu</td>
+                    <td>Thekkekara Boat Club, Mankombu</td>
                     <td>BackWater Chargers</td>
                     <td>Cheruthana</td>
                 </tr>
@@ -177,7 +177,7 @@
                 </tr>
                 <tr>
                     <td>Changanaserry Boat Club</td>
-                    <td>Wave Glyders</td>
+                    <td>Wave Gliders</td>
                     <td>Champakulam</td>
                 </tr>
             </tbody>
@@ -185,41 +185,48 @@
     </div>
 
     <script>
-        // List of matches with venues and dates
+        // List of matches with venues, dates, and timings
         const matches = [
-            { venue: 'Kainakari, Alappuzha', date: '19-09-2025' },
-            { venue: 'Dharmadom, Kannur', date: '' },
-            { venue: 'Thazhathangadi, Kottayam', date: '27-09-2025' },
-            { venue: 'Cheruvathoor, Kasaragod', date: '02-10-2025' },
-            { venue: 'Piravom, Ernakulam', date: '04-10-2025' },
-            { venue: 'Marine Drive, Ernakulam', date: '11-10-2025' },
-            { venue: 'Beypore, Kozhikode', date: '19-10-2025' },
-            { venue: 'Kottappuram, Thrissur', date: '25-10-2025' },
-            { venue: 'Pulinkunnu, Alappuzha', date: '01-11-2025' },
-            { venue: 'Karuvatta, Alappuzha', date: '08-11-2025' },
-            { venue: 'Pandanad, Chengannur, Alappuzha', date: '15-11-2025' },
-            { venue: 'Kayamkulam, Alappuzha', date: '22-11-2025' },
-            { venue: 'Kallada, Kollam', date: '29-11-2025' },
-            { venue: "President's Trophy, Kollam", date: '06-12-2025' },
+            { venue: 'Kainakari, Alappuzha', date: '19-09-2025', startTime: '14:30', endTime: '19:00' },
+            { venue: 'Thazhathangadi, Kottayam', date: '27-09-2025', startTime: '14:30', endTime: '19:00' },
+            { venue: 'Dharmadom, Kannur', date: '02-10-2025', startTime: '14:30', endTime: '19:00' },
+            { venue: 'Cheruvathoor, Kasaragod', date: '02-10-2025', startTime: '14:30', endTime: '19:00' },
+            { venue: 'Piravom, Ernakulam', date: '04-10-2025', startTime: '14:30', endTime: '19:00' },
+            { venue: 'Marine Drive, Ernakulam', date: '11-10-2025', startTime: '14:30', endTime: '19:00' },
+            { venue: 'Beypore, Kozhikode', date: '19-10-2025', startTime: '14:30', endTime: '19:00' },
+            { venue: 'Kottappuram, Thrissur', date: '25-10-2025', startTime: '14:30', endTime: '19:00' },
+            { venue: 'Pulinkunnu, Alappuzha', date: '01-11-2025', startTime: '14:30', endTime: '19:00' },
+            { venue: 'Karuvatta, Alappuzha', date: '08-11-2025', startTime: '14:30', endTime: '19:00' },
+            { venue: 'Pandanad, Chengannur, Alappuzha', date: '15-11-2025', startTime: '14:30', endTime: '19:00' },
+            { venue: 'Kayamkulam, Alappuzha', date: '22-11-2025', startTime: '14:30', endTime: '19:00' },
+            { venue: 'Kallada, Kollam', date: '29-11-2025', startTime: '14:30', endTime: '19:00' },
+            { venue: "President's Trophy, Kollam", date: '06-12-2025', startTime: '14:30', endTime: '19:00' },
         ];
 
         // Function to check the match status
-        function checkMatchStatus(matchDate) {
+        function checkMatchStatus(matchDate, startTime, endTime) {
             const today = new Date();
-            if (!matchDate) return 'Upcoming';
-
             const [day, month, year] = matchDate.split('-');
             const matchDateObj = new Date(`${month}-${day}-${year}`);
+            const startDateTime = new Date(`${month}-${day}-${year} ${startTime}`);
+            const endDateTime = new Date(`${month}-${day}-${year} ${endTime}`);
 
-            return matchDateObj < today ? 'Completed' : 'Upcoming';
+            // Check if the match is completed or upcoming
+            if (today >= endDateTime) {
+                return 'Completed';
+            } else if (today >= startDateTime) {
+                return 'In Progress';
+            } else {
+                return 'Upcoming';
+            }
         }
 
         // Function to display the matches dynamically
         function displaySchedule() {
             const scheduleBody = document.getElementById('schedule-body');
             matches.forEach(match => {
-                const status = match.date ? checkMatchStatus(match.date) : 'Upcoming';
-                const statusClass = status === 'Completed' ? 'completed' : 'upcoming';
+                const status = checkMatchStatus(match.date, match.startTime, match.endTime);
+                const statusClass = status === 'Completed' ? 'completed' : (status === 'In Progress' ? 'upcoming' : 'upcoming');
                 const row = document.createElement('tr');
 
                 row.innerHTML = `
