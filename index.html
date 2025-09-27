@@ -103,6 +103,30 @@
                 font-size: 14px;
             }
         }
+
+        /* Position icons styling */
+        .position-icon {
+            font-size: 1.5em;
+            padding-right: 5px;
+        }
+
+        .gold {
+            color: #03045e;
+        }
+
+        .silver {
+            color: #5f0f40;
+        }
+
+        .bronze {
+            color: #ff0054;
+        }
+
+        /* Placeholder for upcoming matches */
+        .placeholder {
+            color: gray;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -115,6 +139,7 @@
                     <th>Venue</th>
                     <th>Date</th>
                     <th>Status</th>
+                    <th>Winner (1st, 2nd, 3rd)</th>
                 </tr>
             </thead>
             <tbody id="schedule-body">
@@ -125,85 +150,55 @@
 
     <!-- Second Table: Boat Clubs -->
     <div class="table-container">
-        <h1>Champions Boat League 2025</h1>
+        <h1>Champions Boat League 2025 Points Table</h1>
         <table>
             <thead>
                 <tr>
                     <th>Boat Club</th>
                     <th>Team Name</th>
                     <th>Boat Name</th>
+                    <th>Points</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Pallathuruthi Boat Club, Alappuzha</td>
-                    <td>Tropical Titans</td>
-                    <td>Melpadam</td>
-                </tr>
-                <tr>
-                    <td>Village Boat Club, Kainakary</td>
-                    <td>Pride Chasers</td>
-                    <td>Veeyapuram</td>
-                </tr>
-                <tr>
-                    <td>Niranam Boat Club</td>
-                    <td>Backwater Kings</td>
-                    <td>Niranam</td>
-                </tr>
-                <tr>
-                    <td>Punnamada Boat Club</td>
-                    <td>Ripple Breakers</td>
-                    <td>Nadubhagham</td>
-                </tr>
-                <tr>
-                    <td>Emmanuael Boat Club</td>
-                    <td>Chundan Warriers</td>
-                    <td>Naduvileparamban</td>
-                </tr>
-                <tr>
-                    <td>Town Boat Club, Kumarakom</td>
-                    <td>Backwater Warriors</td>
-                    <td>Payippadan</td>
-                </tr>
-                <tr>
-                    <td>Thekkekara Boat Club, Mankombu</td>
-                    <td>BackWater Chargers</td>
-                    <td>Cheruthana</td>
-                </tr>
-                <tr>
-                    <td>Karichal Chundan Boat Club</td>
-                    <td>Thunder Oars</td>
-                    <td>Karichal</td>
-                </tr>
-                <tr>
-                    <td>Changanaserry Boat Club</td>
-                    <td>Wave Gliders</td>
-                    <td>Champakulam</td>
-                </tr>
+            <tbody id="points-table-body">
+                <!-- Points will be dynamically loaded here -->
             </tbody>
         </table>
     </div>
 
     <script>
-        // List of matches with venues, dates, and timings
+        // List of matches with venues, dates, timings, and placeholder winners
         const matches = [
-            { venue: 'Kainakari, Alappuzha', date: '19-09-2025', startTime: '14:30', endTime: '19:00' },
-            { venue: 'Thazhathangadi, Kottayam', date: '27-09-2025', startTime: '14:30', endTime: '19:00' },
-            { venue: 'Dharmadom, Kannur', date: '02-10-2025', startTime: '14:30', endTime: '19:00' },
-            { venue: 'Cheruvathoor, Kasaragod', date: '02-10-2025', startTime: '14:30', endTime: '19:00' },
-            { venue: 'Piravom, Ernakulam', date: '04-10-2025', startTime: '14:30', endTime: '19:00' },
-            { venue: 'Marine Drive, Ernakulam', date: '11-10-2025', startTime: '14:30', endTime: '19:00' },
-            { venue: 'Beypore, Kozhikode', date: '19-10-2025', startTime: '14:30', endTime: '19:00' },
-            { venue: 'Kottappuram, Thrissur', date: '25-10-2025', startTime: '14:30', endTime: '19:00' },
-            { venue: 'Pulinkunnu, Alappuzha', date: '01-11-2025', startTime: '14:30', endTime: '19:00' },
-            { venue: 'Karuvatta, Alappuzha', date: '08-11-2025', startTime: '14:30', endTime: '19:00' },
-            { venue: 'Pandanad, Chengannur, Alappuzha', date: '15-11-2025', startTime: '14:30', endTime: '19:00' },
-            { venue: 'Kayamkulam, Alappuzha', date: '22-11-2025', startTime: '14:30', endTime: '19:00' },
-            { venue: 'Kallada, Kollam', date: '29-11-2025', startTime: '14:30', endTime: '19:00' },
-            { venue: "President's Trophy, Kollam", date: '06-12-2025', startTime: '14:30', endTime: '19:00' },
+            { venue: 'Kainakari, Alappuzha', date: '19-09-2025', startTime: '14:30', endTime: '19:00', winners: ['Veeyapuram(Village Boat Club, Kainakary )', 'Melpadam(Pallathuruthi Boat Club, Alappuzha )', 'Niranam(Niranam Boat Club)'] },
+            { venue: 'Thazhathangadi, Kottayam', date: '27-09-2025', startTime: '14:30', endTime: '19:00', winners: ['Ripple Breakers (1st)', 'Backwater Warriors (2nd)', 'Wave Gliders (3rd)'] },
+            { venue: 'Dharmadom, Kannur', date: '02-10-2025', startTime: '14:30', endTime: '19:00', winners: ['Thunder Oars (1st)', 'Backwater Chargers (2nd)', 'Chundan Warriers (3rd)'] },
+            { venue: 'Cheruvathoor, Kasaragod', date: '02-10-2025', startTime: '14:30', endTime: '19:00', winners: ['Tropical Titans (1st)', 'Pride Chasers (2nd)', 'Backwater Warriors (3rd)'] },
+            { venue: 'Piravom, Ernakulam', date: '04-10-2025', startTime: '14:30', endTime: '19:00', winners: ['Wave Gliders (1st)', 'Backwater Kings (2nd)', 'Ripple Breakers (3rd)'] },
+            { venue: 'Marine Drive, Ernakulam', date: '11-10-2025', startTime: '14:30', endTime: '19:00', winners: ['Chundan Warriers (1st)', 'Backwater Chargers (2nd)', 'Thunder Oars (3rd)'] },
+            { venue: 'Beypore, Kozhikode', date: '19-10-2025', startTime: '14:30', endTime: '19:00', winners: ['Pride Chasers (1st)', 'Tropical Titans (2nd)', 'Backwater Kings (3rd)'] },
+            { venue: 'Kottappuram, Thrissur', date: '25-10-2025', startTime: '14:30', endTime: '19:00', winners: ['Ripple Breakers (1st)', 'Backwater Warriors (2nd)', 'Wave Gliders (3rd)'] },
+            { venue: 'Pulinkunnu, Alappuzha', date: '01-11-2025', startTime: '14:30', endTime: '19:00', winners: ['Thunder Oars (1st)', 'Backwater Chargers (2nd)', 'Chundan Warriers (3rd)'] },
+            { venue: 'Karuvatta, Alappuzha', date: '08-11-2025', startTime: '14:30', endTime: '19:00', winners: ['Tropical Titans (1st)', 'Pride Chasers (2nd)', 'Backwater Kings (3rd)'] },
+            { venue: 'Pandanad, Chengannur, Alappuzha', date: '15-11-2025', startTime: '14:30', endTime: '19:00', winners: ['Wave Gliders (1st)', 'Backwater Warriors (2nd)', 'Ripple Breakers (3rd)'] },
+            { venue: 'Kayamkulam, Alappuzha', date: '22-11-2025', startTime: '14:30', endTime: '19:00', winners: ['Chundan Warriers (1st)', 'Backwater Chargers (2nd)', 'Thunder Oars (3rd)'] },
+            { venue: 'Kallada, Kollam', date: '29-11-2025', startTime: '14:30', endTime: '19:00', winners: ['Pride Chasers (1st)', 'Tropical Titans (2nd)', 'Backwater Kings (3rd)'] },
+            { venue: "President's Trophy, Kollam", date: '06-12-2025', startTime: '14:30', endTime: '19:00', winners: ['Ripple Breakers (1st)', 'Backwater Warriors (2nd)', 'Wave Gliders (3rd)'] }
         ];
 
-        // Function to check the match status
+        // List of Boat Clubs with their Points
+        const boatClubs = [
+            { club: 'Village Boat Club, Kainakary', team: 'Pride Chasers', boat: 'Veeyapuram', points: 10 },
+            { club: 'Pallathuruthi Boat Club, Alappuzha', team: 'Tropical Titans', boat: 'Melpadam', points: 9 },
+            { club: 'Niranam Boat Club', team: 'Backwater Kings', boat: 'Niranam', points: 8 },
+            { club: 'Punnamada Boat Club', team: 'Ripple Breakers', boat: 'Nadubhagham', points: 7 },
+            { club: 'Emmanuael Boat Club', team: 'Chundan Warriers', boat: 'Naduvileparamban', points: 6 },
+            { club: 'Kumarakam Town Boat Club', team: 'Backwater Warriors', boat: 'Payippadan', points: 5 },
+            { club: 'Thekkekara Boat Club, Mankombu', team: 'BackWater Chargers', boat: 'Cheruthana', points: 4 },
+            { club: 'Karichal Chundan Boat Club', team: 'Thunder Oars', boat: 'Karichal', points: 3 },
+            { club: 'Changanaserry Boat Club', team: 'Wave Gliders', boat: 'Champakulam', points: 2 }
+        ];
+
+        // Function to check match status and show winners only for completed matches
         function checkMatchStatus(matchDate, startTime, endTime) {
             const today = new Date();
             const [day, month, year] = matchDate.split('-');
@@ -211,7 +206,6 @@
             const startDateTime = new Date(`${month}-${day}-${year} ${startTime}`);
             const endDateTime = new Date(`${month}-${day}-${year} ${endTime}`);
 
-            // Check if the match is completed or upcoming
             if (today >= endDateTime) {
                 return 'Completed';
             } else if (today >= startDateTime) {
@@ -221,25 +215,49 @@
             }
         }
 
-        // Function to display the matches dynamically
+        // Function to display the match schedule
         function displaySchedule() {
             const scheduleBody = document.getElementById('schedule-body');
             matches.forEach(match => {
                 const status = checkMatchStatus(match.date, match.startTime, match.endTime);
                 const statusClass = status === 'Completed' ? 'completed' : (status === 'In Progress' ? 'upcoming' : 'upcoming');
-                const row = document.createElement('tr');
+                const winnersDisplay = status === 'Completed' 
+                    ? `<span class="position-icon gold">🏅 1st: ${match.winners[0]}</span><br>
+                       <span class="position-icon silver">🥈 2nd: ${match.winners[1]}</span><br>
+                       <span class="position-icon bronze">🥉 3rd: ${match.winners[2]}</span>`
+                    : `<span class="placeholder">To be decided</span>`;
 
+                const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${match.venue}</td>
-                    <td>${match.date || 'TBA'}</td>
+                    <td>${match.date}</td>
                     <td class="${statusClass}">${status}</td>
+                    <td>${winnersDisplay}</td>
                 `;
                 scheduleBody.appendChild(row);
             });
         }
 
-        // Call the displaySchedule function to populate the schedule table
+        // Function to display the points table
+        function displayPointsTable() {
+            const pointsTableBody = document.getElementById('points-table-body');
+            const sortedClubs = boatClubs.sort((a, b) => b.points - a.points);
+            
+            sortedClubs.forEach(club => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${club.club}</td>
+                    <td>${club.team}</td>
+                    <td>${club.boat}</td>
+                    <td>${club.points}</td>
+                `;
+                pointsTableBody.appendChild(row);
+            });
+        }
+
+        // Call functions to populate the tables
         displaySchedule();
+        displayPointsTable();
     </script>
 </body>
 </html>
