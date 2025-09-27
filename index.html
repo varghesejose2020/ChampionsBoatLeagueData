@@ -131,9 +131,27 @@
             color: gray;
             font-style: italic;
         }
+        
+        .icon-container {
+    position: absolute;  /* Use absolute positioning */
+    top: 0;              /* Align to the top */
+    left: 50%;           /* Center horizontally */
+    transform: translateX(-50%); /* Adjust to exactly center horizontally */
+    z-index: 1000;       /* Ensure the icon appears above other elements */
+    padding-top: 20px;   /* Add some space from the top */
+}
+.cbl-icon {
+            width: 150px;     /* Adjust the size of the icon */
+            height: auto;     /* Maintain aspect ratio */
+        }
     </style>
 </head>
 <body>
+    
+    <!-- Centered CBL Icon at the Top -->
+    <div class="icon-container">
+        <img src="https://www.keralatourism.org/assets/img/cbl/icons/icon-cbl.svg" alt="CBL Icon" class="cbl-icon">
+    </div>
     <!-- First Table: Schedule -->
     <div class="table-container">
         <h1>Champions Boat League 2025 Schedule</h1>
@@ -231,7 +249,7 @@
                     ? `<span class="position-icon gold">🏅 1st: ${match.winners[0]}</span><br>
                        <span class="position-icon silver">🥈 2nd: ${match.winners[1]}</span><br>
                        <span class="position-icon bronze">🥉 3rd: ${match.winners[2]}</span>`
-                    : `<span class="placeholder">To be decided</span>`;
+                    : `<span class="placeholder">TBA</span>`;
 
                 const row = document.createElement('tr');
                 row.innerHTML = `
