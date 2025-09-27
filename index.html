@@ -76,6 +76,10 @@
             color: red;
             font-weight: bold;
         }
+        .InProgress {
+            color: #090040;
+            font-weight: bold;
+        }
 
         /* Table Row Style */
         tbody tr:nth-child(even) td {
@@ -220,7 +224,9 @@
             const scheduleBody = document.getElementById('schedule-body');
             matches.forEach(match => {
                 const status = checkMatchStatus(match.date, match.startTime, match.endTime);
-                const statusClass = status === 'Completed' ? 'completed' : (status === 'In Progress' ? 'upcoming' : 'upcoming');
+                const statusClass = status === 'Completed' ? 'completed' : (status === 'In Progress' ? 'InProgress' : 'upcoming');
+
+                
                 const winnersDisplay = status === 'Completed' 
                     ? `<span class="position-icon gold">🏅 1st: ${match.winners[0]}</span><br>
                        <span class="position-icon silver">🥈 2nd: ${match.winners[1]}</span><br>
