@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Champions Boat League 2025</title>
     <style>
-        /* General Body Styles */
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fc;
@@ -19,17 +18,15 @@
             padding-top: 30px;
         }
 
-        /* Container for the Tables */
         .table-container {
             width: 45%;
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            margin-top:120px;
+            margin-top: 120px;
         }
 
-        /* Table Header Styles */
         h1 {
             text-align: center;
             color: #333;
@@ -37,14 +34,12 @@
             margin-bottom: 20px;
         }
 
-        /* Table Styles */
         table {
             width: 100%;
             border-collapse: collapse;
             text-align: left;
         }
 
-        /* Table Header */
         th {
             background-color: #2c3e50;
             color: white;
@@ -54,7 +49,6 @@
             letter-spacing: 1px;
         }
 
-        /* Table Body (Rows) */
         td {
             padding: 12px;
             border: 1px solid #dcdcdc;
@@ -62,12 +56,10 @@
             vertical-align: middle;
         }
 
-        /* Hover effect for rows */
         tbody tr:hover {
             background-color: #f1f1f1;
         }
 
-        /* Status Color */
         .completed {
             color: green;
             font-weight: bold;
@@ -77,22 +69,20 @@
             color: red;
             font-weight: bold;
         }
+
         .InProgress {
             color: #007bff;
             font-weight: bold;
         }
 
-        /* Table Row Style */
         tbody tr:nth-child(even) td {
             background-color: #f3f3f3;
         }
 
-        /* Table Row Style for odd rows */
         tbody tr:nth-child(odd) td {
             background-color: #ffffff;
         }
 
-        /* Responsive Design for Smaller Screens */
         @media (max-width: 768px) {
             body {
                 flex-direction: column;
@@ -109,7 +99,6 @@
             }
         }
 
-        /* Position icons styling */
         .position-icon {
             font-size: 1em;
             padding-right: 5px;
@@ -127,33 +116,34 @@
             color: #ff0054;
         }
 
-        /* Placeholder for upcoming matches */
         .placeholder {
             color: gray;
             font-style: italic;
         }
-        
+
         .icon-container {
-    position: absolute;  /* Use absolute positioning */
-    top: 0;              /* Align to the top */
-    left: 50%;           /* Center horizontally */
-    transform: translateX(-50%); /* Adjust to exactly center horizontally */
-    z-index: 1000;       /* Ensure the icon appears above other elements */
-    padding-top: 20px;   /* Add some space from the top */
-}
-.cbl-icon {
-            width: 150px;     /* Adjust the size of the icon */
-            height: auto;     /* Maintain aspect ratio */
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            padding-top: 20px;
+        }
+
+        .cbl-icon {
+            width: 150px;
+            height: auto;
         }
     </style>
 </head>
 <body>
-    
-    <!-- Centered CBL Icon at the Top -->
+
+    <!-- CBL Icon -->
     <div class="icon-container">
         <img src="https://www.keralatourism.org/assets/img/cbl/icons/icon-cbl.svg" alt="CBL Icon" class="cbl-icon">
     </div>
-    <!-- First Table: Schedule -->
+
+    <!-- Schedule Table -->
     <div class="table-container">
         <h1>Champions Boat League 2025 Schedule</h1>
         <table>
@@ -166,12 +156,12 @@
                 </tr>
             </thead>
             <tbody id="schedule-body">
-                <!-- Dynamic Content Will Be Loaded Here -->
+                <!-- Schedule data inserted by JavaScript -->
             </tbody>
         </table>
     </div>
 
-    <!-- Second Table: Boat Clubs -->
+    <!-- Points Table -->
     <div class="table-container">
         <h1>Champions Boat League 2025 Points Table</h1>
         <table>
@@ -184,18 +174,17 @@
                 </tr>
             </thead>
             <tbody id="points-table-body">
-                <!-- Points will be dynamically loaded here -->
+                <!-- Points data inserted by JavaScript -->
             </tbody>
         </table>
     </div>
 
     <script>
-        // List of matches with venues, dates, timings, and placeholder winners
         const matches = [
             { venue: 'Kainakari, Alappuzha', date: '19-09-2025', startTime: '14:30', endTime: '19:00', winners: ['Veeyapuram(Village Boat Club, Kainakary )', 'Melpadam(Pallathuruthi Boat Club, Alappuzha )', 'Niranam(Niranam Boat Club)'] },
             { venue: 'Thazhathangadi, Kottayam', date: '27-09-2025', startTime: '14:30', endTime: '17:00', winners: ['Veeyapuram(Village Boat Club, Kainakary )', 'Melpadam(Pallathuruthi Boat Club, Alappuzha )','Nadubhagam(Punnamada Boat Club)'] },
-            { venue: 'Dharmadom, Kannur', date: '02-10-2025', startTime: '14:30', endTime: '19:00', winners: ['Thunder Oars (1st)', 'Backwater Chargers (2nd)', 'Chundan Warriers (3rd)'] },
-            { venue: 'Piravom, Ernakulam', date: '04-10-2025', startTime: '14:30', endTime: '19:00', winners: ['Tropical Titans (1st)', 'Pride Chasers (2nd)', 'Backwater Warriors (3rd)'] },
+            { venue: 'Dharmadom, Kannur', date: '02-10-2025', startTime: '14:30', endTime: '19:00', winners: [], isSnakeboatRace: false },
+            { venue: 'Piravom, Ernakulam', date: '04-10-2025', startTime: '14:30', endTime: '19:00', winners: [], isSnakeboatRace: true },
             { venue: 'Cheruvathoor, Kasaragod', date: '12-10-2025', startTime: '14:30', endTime: '19:00', winners: ['Wave Gliders (1st)', 'Backwater Kings (2nd)', 'Ripple Breakers (3rd)'] },
             { venue: 'Marine Drive, Ernakulam', date: '17-10-2025', startTime: '14:30', endTime: '19:00', winners: ['Chundan Warriers (1st)', 'Backwater Chargers (2nd)', 'Thunder Oars (3rd)'] },
             { venue: 'Beypore, Kozhikode', date: '19-10-2025', startTime: '14:30', endTime: '19:00', winners: ['Pride Chasers (1st)', 'Tropical Titans (2nd)', 'Backwater Kings (3rd)'] },
@@ -208,7 +197,6 @@
             { venue: "President's Trophy, Kollam", date: '06-12-2025', startTime: '14:30', endTime: '19:00', winners: ['Ripple Breakers (1st)', 'Backwater Warriors (2nd)', 'Wave Gliders (3rd)'] }
         ];
 
-        // List of Boat Clubs with their Points
         const boatClubs = [
             { club: 'Village Boat Club, Kainakary', team: 'Pride Chasers', boat: 'Veeyapuram', points: 20 },
             { club: 'Pallathuruthi Boat Club, Alappuzha', team: 'Tropical Titans', boat: 'Melpadam', points: 18 },
@@ -221,7 +209,6 @@
             { club: 'Changanaserry Boat Club', team: 'Wave Gliders', boat: 'Champakulam', points: 4 }
         ];
 
-        // Function to check match status and show winners only for completed matches
         function checkMatchStatus(matchDate, startTime, endTime) {
             const today = new Date();
             const [day, month, year] = matchDate.split('-');
@@ -229,28 +216,29 @@
             const startDateTime = new Date(`${month}-${day}-${year} ${startTime}`);
             const endDateTime = new Date(`${month}-${day}-${year} ${endTime}`);
 
-            if (today >= endDateTime) {
-                return 'Completed';
-            } else if (today >= startDateTime) {
-                return 'In Progress';
-            } else {
-                return 'Upcoming';
-            }
+            if (today >= endDateTime) return 'Completed';
+            if (today >= startDateTime) return 'In Progress';
+            return 'Upcoming';
         }
 
-        // Function to display the match schedule
         function displaySchedule() {
             const scheduleBody = document.getElementById('schedule-body');
             matches.forEach(match => {
                 const status = checkMatchStatus(match.date, match.startTime, match.endTime);
                 const statusClass = status === 'Completed' ? 'completed' : (status === 'In Progress' ? 'InProgress' : 'upcoming');
 
-                
-                const winnersDisplay = status === 'Completed' 
-                    ? `<span class="position-icon gold">🏅 1st: ${match.winners[0]}</span><br>
-                       <span class="position-icon silver">🥈 2nd: ${match.winners[1]}</span><br>
-                       <span class="position-icon bronze">🥉 3rd: ${match.winners[2]}</span>`
-                    : `<span class="placeholder">TBA</span>`;
+                let winnersDisplay = '';
+                if (match.isSnakeboatRace === false) {
+                    winnersDisplay = `<span class="placeholder">Not for Snakeboats</span>`;
+                } else if (status === 'Completed') {
+                    winnersDisplay = `
+                        <span class="position-icon gold">🏅 1st: ${match.winners[0]}</span><br>
+                        <span class="position-icon silver">🥈 2nd: ${match.winners[1]}</span><br>
+                        <span class="position-icon bronze">🥉 3rd: ${match.winners[2]}</span>
+                    `;
+                } else {
+                    winnersDisplay = `<span class="placeholder">TBA</span>`;
+                }
 
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -263,11 +251,9 @@
             });
         }
 
-        // Function to display the points table
         function displayPointsTable() {
             const pointsTableBody = document.getElementById('points-table-body');
             const sortedClubs = boatClubs.sort((a, b) => b.points - a.points);
-            
             sortedClubs.forEach(club => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -280,7 +266,6 @@
             });
         }
 
-        // Call functions to populate the tables
         displaySchedule();
         displayPointsTable();
     </script>
